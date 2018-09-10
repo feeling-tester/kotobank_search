@@ -138,7 +138,6 @@ class InputKeywordScreen(BoxLayout, Screen):
             self.address_to_kotobank = "https://kotobank.jp"
             self.URL_message = 'コトバンクへ'
             return
-            
 
         raw_html, URL = self.get_data_from_kotobank()
         if (raw_html == "IndexError"):
