@@ -43,8 +43,6 @@ class AskQuestionScreen(BoxLayout, Screen):
         self.answer_message = 'そうなのか…ごめんね(´・ω・｀)\nこれからもっと頑張るね(´・ω・｀)'
         self.press_count += 1
 
-    def clear_answer_message(self):
-        self.answer_message = ''
 
 class InputKeywordScreen(BoxLayout, Screen):
     input_word = ObjectProperty(None)
