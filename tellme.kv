@@ -1,11 +1,48 @@
 #:kivy 1.10.0
 
-<ViewResultScreen>:
+<AskQuestionScreen>:
     padding: 50
 
-
-
-
+    BoxLayout:
+        size_hint: 1, 1
+        orientation: 'vertical'
+        Label:
+            size_hint: 1, .25
+            font_size: 40
+            text: "このアプリ、使いやすい？"
+            font_name: 'ipaexm.ttf'
+        BoxLayout:
+            size_hint: 1, .15
+            Button:
+                # id: msg
+                size_hint: .5, 1
+                font_size: 23
+                text: "うん"
+                font_name: 'TakaoGothic.ttf'
+                # if clicked
+                on_release: root.select_yes()            
+                
+            Button:
+                # id: msg
+                size_hint: .5, 1
+                font_size: 23
+                text: "いや"
+                font_name: 'TakaoGothic.ttf'
+                # if clicked
+                on_release: root.select_no()
+        Label:
+            size_hint: 1, .25
+            font_size: 40
+            text: root.answer_message
+            font_name: 'ipaexm.ttf'
+        Button:
+            size_hint: 1, .15
+            font_size: 30
+            text: "戻る"
+            font_name: 'ipaexm.ttf'
+            # if clicked
+            on_press: root.manager.current = 'input'
+            
 <InputKeywordScreen>:
     input_word: word
     padding: 35
@@ -48,13 +85,24 @@
             font_name: 'TakaoGothic.ttf'
             # if clicked
             #on_release: root.setup_account()
-        Button:
-            # id: msg
+        BoxLayout:
+            orientation: 'horizontal'
             size_hint: 1, .05
-            font_size: 30
-            text: root.URL_message
-            font_name: 'TakaoGothic.ttf'
-            # if clicked
-            on_release: root.access_to_kotobank()            
+            Button:
+                # id: msg
+                size_hint: .5, 1
+                font_size: 23
+                text: root.URL_message
+                font_name: 'TakaoGothic.ttf'
+                # if clicked
+                on_release: root.access_to_kotobank()            
 
-
+            Button:
+                # id: msg
+                size_hint: .5, 1
+                font_size: 23
+                text: "アンケート"
+                font_name: 'TakaoGothic.ttf'
+                # if clicked
+                on_release: root.access_to_kotobank()  
+                on_press: root.manager.current = 'question'

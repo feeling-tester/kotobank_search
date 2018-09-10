@@ -20,8 +20,31 @@ from kivy.resources import resource_add_path
 if hasattr(sys, "_MEIPASS"):
     resource_add_path(sys._MEIPASS)
     
-class ViewResultScreen(BoxLayout, Screen):
-    pass
+class AskQuestionScreen(BoxLayout, Screen):
+    answer_message = StringProperty()
+    press_count = 0
+    def __init__(self, **kwargs):
+        super(AskQuestionScreen, self).__init__(**kwargs)
+        self.answer_message = ''
+        self.press_count = 0
+        pass
+
+    def select_yes(self):
+        if self.press_count == 1:
+            self.answer_message = '既に感想を送ってくれたみたいだよ。\nありがとう！'
+            return
+        self.answer_message = 'ありがとう！\nこれからももっと使ってね！'
+        self.press_count += 1
+
+    def select_no(self):
+        if self.press_count == 1:
+            self.answer_message = '既に感想を送ってくれたみたいだよ。\nありがとうね〜'
+            return
+        self.answer_message = 'そうなのか…ごめんね(´・ω・｀)\nこれからもっと頑張るね(´・ω・｀)'
+        self.press_count += 1
+
+    def clear_answer_message(self):
+        self.answer_message = ''
 
 class InputKeywordScreen(BoxLayout, Screen):
     input_word = ObjectProperty(None)
@@ -31,6 +54,9 @@ class InputKeywordScreen(BoxLayout, Screen):
     def __init__(self, **kwargs):
         super(InputKeywordScreen, self).__init__(**kwargs)
         self.result_msg = 'ここに意味が表示されるよ'
+
+    def get_input_msg(self):
+        return self.input_word
 
     def get_data_from_kotobank(self):
         try:
@@ -147,7 +173,7 @@ class TellMeApp(App):
     def build(self):
         sm = ScreenManager()
         sm.add_widget(InputKeywordScreen(name='input'))
-        sm.add_widget(ViewResultScreen(name='result'))
+        sm.add_widget(AskQuestionScreen(name='question'))
         return sm
 
 if __name__ == '__main__':
