@@ -1,33 +1,22 @@
-from kivy.app import App
-from kivy.uix.widget import Widget
-# from __future__ import print_function
-import oauth2 
 import sys
-import sqlite3
-import twitter
-import urllib
 import webbrowser as web
-import ast
-from contextlib import closing
-from contextlib import contextmanager
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty
-from kivy.config import Config
 from kivy.uix.button import Button
-import configparser
 from kivy.core.window import Window
 from kivy.properties import StringProperty
 import os.path
 import re
 from urllib.parse import quote
 from kivy.resources import resource_add_path
-import sys
+
 if hasattr(sys, "_MEIPASS"):
     resource_add_path(sys._MEIPASS)
     
