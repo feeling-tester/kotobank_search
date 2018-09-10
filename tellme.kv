@@ -1,0 +1,60 @@
+#:kivy 1.10.0
+
+<ViewResultScreen>:
+    padding: 50
+
+
+
+
+<InputKeywordScreen>:
+    input_word: word
+    padding: 35
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            size_hint: 1, .1
+            font_size: 40
+            text: "知りたい単語を入力してね。"
+            font_name: 'ipaexm.ttf'
+            #id: hoge
+        TextInput:
+            id: word
+            size_hint: 1, .1
+            font_size: 40
+            text: ""
+            font_name: 'ipaexm.ttf'
+            #id: hoge
+
+        Label:
+            size_hint: 1, .02
+            font_size: 40
+            text: ""
+            font_name: 'ipaexm.ttf'
+            #id: hoge
+        Button:
+            size_hint: 1, .08
+            font_size: 30
+            text: "検索"
+            font_name: 'ipaexm.ttf'
+            # if clicked
+            on_release: root.set_sent()
+            #on_press: root.manager.current = 'result'
+        Label:
+            # id: msg
+            size_hint: 1, .3
+            font_size: 23
+            text: root.result_msg
+            #font_name: 'ipaexm.ttf'
+            font_name: 'TakaoGothic.ttf'
+            # if clicked
+            #on_release: root.setup_account()
+        Button:
+            # id: msg
+            size_hint: 1, .05
+            font_size: 30
+            text: root.URL_message
+            font_name: 'TakaoGothic.ttf'
+            # if clicked
+            on_release: root.access_to_kotobank()            
+
+
