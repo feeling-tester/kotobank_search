@@ -2,7 +2,7 @@ import pyaudio
 import wave
 import requests
 import json
-import ConfigParser
+import configparser
 
 
 def record_voice():
@@ -43,15 +43,15 @@ def record_voice():
     wf.close()
 
 def get_text_from_voice():
-    config = ConfigParser.ConfigParser()
-
+    config = configparser.ConfigParser()
+    config.read('config.ini')
     APIKEY = config.get('API', 'APIKEY')
-    
     url = "https://api.apigw.smt.docomo.ne.jp/amiVoice/v1/recognize?APIKEY={}".format(APIKEY)
     files = {"a": open("./output2.wav", 'rb'), "v":"on"}
     r = requests.post(url, files=files)
     print(r.json()['text'])
     print(r)
+    return r.json()['text']
 
-record_voice()
-get_text_from_voice()
+# record_voice()
+# get_text_from_voice()

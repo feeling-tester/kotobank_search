@@ -68,14 +68,29 @@
             text: ""
             font_name: 'ipaexm.ttf'
             #id: hoge
-        Button:
+
+        BoxLayout:
             size_hint: 1, .08
-            font_size: 30
-            text: "検索"
-            font_name: 'ipaexm.ttf'
-            # if clicked
-            on_release: root.set_sent()
-            #on_press: root.manager.current = 'result'
+            Button:
+                size_hint: .5, 1
+                font_size: 30
+                text: "検索"
+                font_name: 'ipaexm.ttf'
+                # if clicked
+                on_release: root.set_sent_from_text()
+                #on_press: root.manager.current = 'result'
+            Button:
+                size_hint: .5, 1
+                font_size: 30
+                text: "音声入力"
+                font_name: 'ipaexm.ttf'
+                # if clicked
+                on_release: root.set_sent_from_voice()
+                #on_press: root.manager.current = 'result'
+
+
+
+            
         Label:
             # id: msg
             size_hint: 1, .3

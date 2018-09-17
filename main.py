@@ -16,6 +16,8 @@ import os.path
 import re
 from urllib.parse import quote
 from kivy.resources import resource_add_path
+from voice import record_voice
+from voice import get_text_from_voice
 
 if hasattr(sys, "_MEIPASS"):
     resource_add_path(sys._MEIPASS)
@@ -132,7 +134,7 @@ class InputKeywordScreen(BoxLayout, Screen):
         # print(b)
         return shaped_result
     
-    def set_sent(self):
+    def set_sent_from_text(self):
         if self.input_word.text == "":
             self.result_msg = "なにか入力してよ〜〜"
             self.address_to_kotobank = "https://kotobank.jp"
@@ -162,6 +164,15 @@ class InputKeywordScreen(BoxLayout, Screen):
         #print(self.result_msg)
         pass
 
+    def set_sent_from_voice(self):
+        print("音声入力中")
+        record_voice()
+        voice_text = get_text_from_voice().replace("、", "").replace("。", "")
+        # self.result_msg = "終わり"
+        print("音声入力終了")
+        self.input_word.text = voice_text
+        self.set_sent_from_text()
+        
     def access_to_kotobank(self):
         browser = web.get('"/usr/bin/google-chrome" %s')
         browser.open(self.address_to_kotobank)
