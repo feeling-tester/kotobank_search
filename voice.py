@@ -3,8 +3,39 @@ import wave
 import requests
 import json
 import configparser
+import subprocess
 
+def gererate_voice_data(speak_str, wavefile_path):
+    jtalk_path = "~/HTS/open_jtalk/bin/open_jtalk"
+    voicemodel_path = "/usr/share/hts-voice/mei/mei_normal.htsvoice"
+    dictmodel_path = "/var/lib/mecab/dic/open-jtalk/naist-jdic"
+    #print(speak_str)
+    commands = "echo "+ str(speak_str).replace("\n", "") + "|"\
+               + jtalk_path\
+               + " -m "+ voicemodel_path\
+               + " -x "+ dictmodel_path\
+               + " -ow "+ wavefile_path
+    #print(commands)
+    
+    proc = subprocess.Popen(
+        commands,
+        shell  = True,
+        stdin  = subprocess.PIPE,
+        stdout = subprocess.PIPE,
+        stderr = subprocess.PIPE)  
+    stdout_data, stderr_data = proc.communicate() #処理実行を待つ(†1)
+    
+    #print(stdout_data)  #標準出力の確認
+    #print(stderr_data)  #標準エラーの確認
 
+def play_wav(wavefile_path):
+    commands = "aplay " + wavefile_path
+    #print(commands)
+    proc = subprocess.Popen(
+        commands,
+        shell  = True)  
+    stdout_data, stderr_data = proc.communicate() #処理実行を待つ(†1)
+    
 def record_voice():
     CHUNK = 1024
     FORMAT = pyaudio.paInt16 # int16型
@@ -55,3 +86,4 @@ def get_text_from_voice():
 
 # record_voice()
 # get_text_from_voice()
+#gererate_voice_data("あああ", "tmp.wav")

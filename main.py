@@ -18,6 +18,9 @@ from urllib.parse import quote
 from kivy.resources import resource_add_path
 from voice import record_voice
 from voice import get_text_from_voice
+from voice import gererate_voice_data
+from voice import play_wav
+import asyncio
 
 if hasattr(sys, "_MEIPASS"):
     resource_add_path(sys._MEIPASS)
@@ -133,7 +136,7 @@ class InputKeywordScreen(BoxLayout, Screen):
             shaped_result = shaped_result[:-1] + '…\n'
         # print(b)
         return shaped_result
-    
+
     def set_sent_from_text(self):
         if self.input_word.text == "":
             self.result_msg = "なにか入力してよ〜〜"
@@ -162,6 +165,10 @@ class InputKeywordScreen(BoxLayout, Screen):
         self.URL_message = 'この単語をコトバンクで調べよう'
         #print(self.URL_message)
         #print(self.result_msg)
+        gererate_voice_data("\"" + self.result_msg + "\"", "res.wav")
+        play_wav("res.wav")
+        # loop = asyncio.get_event_loop()
+        # loop.run_until_complete(self.pass_msg())
         pass
 
     def set_sent_from_voice(self):
