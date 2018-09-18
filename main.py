@@ -21,6 +21,7 @@ from voice import get_text_from_voice
 from voice import gererate_voice_data
 from voice import play_wav
 import asyncio
+import subprocess
 
 if hasattr(sys, "_MEIPASS"):
     resource_add_path(sys._MEIPASS)
@@ -167,6 +168,15 @@ class InputKeywordScreen(BoxLayout, Screen):
         #print(self.result_msg)
         gererate_voice_data("\"" + self.result_msg + "\"", "res.wav")
         play_wav("res.wav")
+        commands = "rm -f res.wav"
+        proc = subprocess.Popen(
+            commands,
+            shell  = True,
+            stdin  = subprocess.PIPE,
+            stdout = subprocess.PIPE,
+            stderr = subprocess.PIPE)  
+        stdout_data, stderr_data = proc.communicate() #処理実行を待つ(†1)
+    
         # loop = asyncio.get_event_loop()
         # loop.run_until_complete(self.pass_msg())
         pass
