@@ -156,14 +156,14 @@ class InputKeywordScreen(BoxLayout, Screen):
         if (hit_data_from_html == "AttributeError"):
             self.result_msg = "ちょっと下のボタンで検索してみて"
             self.address_to_kotobank = URL
-            self.URL_message = 'この単語をコトバンクで調べよう'
+            self.URL_message = 'コトバンクで調べてみよう'
             return
         msg = self.shape_result(hit_data_from_html)
 
         # print(msg)
         self.result_msg = msg
         self.address_to_kotobank = URL
-        self.URL_message = 'この単語をコトバンクで調べよう'
+        self.URL_message = 'コトバンクで調べてみよう'
         #print(self.URL_message)
         #print(self.result_msg)
         gererate_voice_data("\"" + self.result_msg + "\"", "res.wav")
